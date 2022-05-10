@@ -16,13 +16,13 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    compileSdk = 31
-    buildToolsVersion = "31.0.0"
+    compileSdkVersion(31)
+    ndkVersion = "22.1.7171670"
 
     defaultConfig {
-        applicationId = "com.phlox.tvwebbrowser"
-        minSdk = 21
-        targetSdk = 30
+        applicationId = "com.pratt.tvwebbrowser"
+        minSdkVersion(21)
+        targetSdkVersion(30)
         versionCode = 53
         versionName = "1.8.2"
 
@@ -34,7 +34,7 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = rootProject.file(properties.getProperty("storeFile", ""))
+            storeFile = rootProject.file(properties.getProperty("storeFile", "\\"))
             storePassword = properties.getProperty("storePassword", "")
             keyAlias = properties.getProperty("keyAlias", "")
             keyPassword = properties.getProperty("keyPassword", "")
@@ -49,16 +49,16 @@ android {
         }
     }
 
-    flavorDimensions += listOf("appstore")
+    flavorDimensions(*(flavorDimensionList + listOf("appstore")).toTypedArray())
     productFlavors {
         create("generic") {
-            dimension = "appstore"
+            setDimension("appstore")
         }
         create("google") {
-            dimension = "appstore"
+            setDimension("appstore")
         }
         create("amazon") {
-            dimension = "appstore"
+            setDimension("appstore")
         }
     }
 
@@ -67,8 +67,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility to JavaVersion.VERSION_1_8
-        targetCompatibility to JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kapt {
